@@ -1,0 +1,2519 @@
+{
+  "info": {
+    "_postman_id": "81e08fce-9655-4e2d-adb3-fe299643f104",
+    "name": "farmers-market",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "41819373"
+  },
+  "item": [
+    {
+      "name": "add-product",
+      "item": [
+        {
+          "name": "valid-fields",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Product created successfully\", () => {\r\n    pm.response.to.have.status(201);\r\n});\r\n\r\npm.test(\"Response is valid JSON\", () => {\r\n    pm.response.to.be.json;\r\n});\r\n\r\npm.test(\"Response time is acceptable\", () => {\r\n    pm.expect(pm.response.responseTime).to.be.below(2000);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Tomatoes\",\r\n  \"price\": 100,\r\n  \"quantity\": 50,\r\n  \"farmer_id\": 14,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "products"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "valid-fields",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Tomatoes\",\r\n  \"price\": 100,\r\n  \"quantity\": 50,\r\n  \"farmer_id\": 14,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/products",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "35"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"23-Lxu56xA20SvDxGzWfA/zUwkSwd0\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 15 Nov 2026 17:23:34 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"message\": \"Product added\",\n  \"id\": 28\n}"
+            }
+          ]
+        },
+        {
+          "name": "without-name",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Missing product name is rejected\", () => {\r\n    pm.expect(pm.response.code).to.be.oneOf([400, 422]);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"\",\r\n  \"price\": 200,\r\n  \"quantity\": 5,\r\n  \"farmer_id\": 14,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "products"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "without-name",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"\",\r\n  \"price\": 200,\r\n  \"quantity\": 5,\r\n  \"farmer_id\": 14,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/products",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "35"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"23-ZSAZ2GCL6qg6GsgSjw9e1IKVoT0\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 15 Nov 2026 17:32:55 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Missing required fields\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "name-containing-space",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Product name contains spaces\", () => {\r\n    const data = pm.response.json();\r\n    pm.expect(data.name).to.include(\" \");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \" \",\r\n  \"price\": 100,\r\n  \"quantity\": 5,\r\n  \"farmer_id\": 14,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "products"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "name-containing-space",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \" \",\r\n  \"price\": 100,\r\n  \"quantity\": 5,\r\n  \"farmer_id\": 14,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/products",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "35"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"23-rAJtyHUYf5ZwuMGpWIiF01e+8Q4\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 15 Nov 2026 17:25:00 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"message\": \"Product added\",\n  \"id\": 30\n}"
+            }
+          ]
+        },
+        {
+          "name": "long-product-name",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Long product name is handled correctly\", () => {\r\n    pm.response.to.have.status(201);\r\n});\r\n"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Tomatoes,Carrotes, Betroots, Cabbages, Leaks, Cucumber, Rabbish, Onion, Garlic, Bitter Guard\",\r\n  \"price\": 100,\r\n  \"quantity\": 5,\r\n  \"farmer_id\": 14,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "products"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "long-product-name",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Tomatoes,Carrotes, Betroots, Cabbages, Leaks, Cucumber, Rabbish, Onion, Garlic, Bitter Guard\",\r\n  \"price\": 100,\r\n  \"quantity\": 5,\r\n  \"farmer_id\": 14,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/products",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "35"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"23-wlOSAnVQb9Eq4brVadW6rJ702KI\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 15 Nov 2026 17:33:38 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"message\": \"Product added\",\n  \"id\": 38\n}"
+            }
+          ]
+        },
+        {
+          "name": "without-price",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Missing price is rejected\", () => {\r\n    pm.expect(pm.response.code).to.be.oneOf([400, 422]);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Fresh Tomatoes\",\r\n  \r\n  \"quantity\": -5,\r\n  \"farmer_id\": 1,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "products"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "without-price",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Fresh Tomatoes\",\r\n  \r\n  \"quantity\": -5,\r\n  \"farmer_id\": 1,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/products",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "35"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"23-ZSAZ2GCL6qg6GsgSjw9e1IKVoT0\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 15 Nov 2026 17:32:36 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Missing required fields\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "without-quantity",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Missing quantity is rejected\", () => {\r\n    pm.expect(pm.response.code).to.be.oneOf([400, 422]);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Tomatoes\",\r\n  \"price\": 100,\r\n  \r\n  \"farmer_id\": 14,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "products"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "without-quantity",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Tomatoes\",\r\n  \"price\": 100,\r\n  \r\n  \"farmer_id\": 14,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/products",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "35"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"23-ZSAZ2GCL6qg6GsgSjw9e1IKVoT0\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 15 Nov 2026 17:32:18 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Missing required fields\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "without-farmer-id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Missing farmer ID is rejected\", () => {\r\n    pm.expect(pm.response.code).to.be.oneOf([400, 422]);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Tomatoes\",\r\n  \"price\": 100,\r\n  \"quantity\": 5,\r\n  \r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "products"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "without-farmer-id",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Tomatoes\",\r\n  \"price\": 100,\r\n  \"quantity\": 5,\r\n  \r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/products",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "35"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"23-ZSAZ2GCL6qg6GsgSjw9e1IKVoT0\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 15 Nov 2026 17:32:01 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Missing required fields\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "without-unit",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Missing unit is rejected\", () => {\r\n    pm.expect(pm.response.code).to.be.oneOf([400, 422]);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Tomatoes\",\r\n  \"price\": 100,\r\n  \"quantity\": 5,\r\n  \"farmer_id\": 14,\r\n\r\n  \"category\": \"Vegetables\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "products"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "without-unit",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Tomatoes\",\r\n  \"price\": 100,\r\n  \"quantity\": 5,\r\n  \"farmer_id\": 14,\r\n\r\n  \"category\": \"Vegetables\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/products",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "35"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"23-ZSAZ2GCL6qg6GsgSjw9e1IKVoT0\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 15 Nov 2026 17:31:43 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Missing required fields\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "without-category",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Missing category is rejected\", () => {\r\n    pm.expect(pm.response.code).to.be.oneOf([400, 422]);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Tomatoes\",\r\n  \"price\": 100,\r\n  \"quantity\": 5,\r\n  \"farmer_id\": 14,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "products"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "without-category",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Tomatoes\",\r\n  \"price\": 100,\r\n  \"quantity\": 5,\r\n  \"farmer_id\": 14,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/products",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "35"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"23-ZSAZ2GCL6qg6GsgSjw9e1IKVoT0\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 15 Nov 2026 17:31:23 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Missing required fields\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "product-with-price-zero",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Zero price is rejected\", () => {\r\n    pm.expect(pm.response.code).to.be.oneOf([400, 422]);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Tomatoes\",\r\n  \"price\": 0,\r\n  \"quantity\": 5,\r\n  \"farmer_id\": 14,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "products"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "product-with-price-zero",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Tomatoes\",\r\n  \"price\": 0,\r\n  \"quantity\": 5,\r\n  \"farmer_id\": 14,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/products",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "35"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"23-ZSAZ2GCL6qg6GsgSjw9e1IKVoT0\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 15 Nov 2026 17:31:02 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Missing required fields\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "negative-price",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Negative price is rejected\", () => {\r\n    pm.expect(pm.response.code).to.be.oneOf([400, 422]);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Tomatoes\",\r\n  \"price\": -100,\r\n  \"quantity\": 5,\r\n  \"farmer_id\": 14,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "products"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "negative-price",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Tomatoes\",\r\n  \"price\": -100,\r\n  \"quantity\": 5,\r\n  \"farmer_id\": 14,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/products",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "96"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"60-iP3cqnj6jyfRGmg1XeeZBhWN16w\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 15 Nov 2026 17:30:34 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"new row for relation \\\"products\\\" violates check constraint \\\"products_price_check\\\"\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "negative-quantity",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Negative quantity is rejected\", () => {\r\n    pm.expect(pm.response.code).to.be.oneOf([400, 422]);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Tomatoes\",\r\n  \"price\": 100,\r\n  \"quantity\": -5,\r\n  \"farmer_id\": 14,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "products"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "negative-quantity",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Tomatoes\",\r\n  \"price\": 100,\r\n  \"quantity\": -5,\r\n  \"farmer_id\": 14,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/products",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "99"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"63-ZcauAtEsNnqVsZrpsrCWW0EUMbs\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 15 Nov 2026 17:30:14 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"new row for relation \\\"products\\\" violates check constraint \\\"products_quantity_check\\\"\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "invalid-farmer-id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Invalid farmer ID is rejected\", () => {\r\n    pm.expect(pm.response.code).to.be.oneOf([400, 404, 422]);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Tomatoes\",\r\n  \"price\": 100,\r\n  \"quantity\": 5,\r\n  \"farmer_id\": 25,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "products"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "invalid-farmer-id",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Tomatoes\",\r\n  \"price\": 100,\r\n  \"quantity\": 5,\r\n  \"farmer_id\": 25,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/products",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "110"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"6e-c1QeT7N3UwohHMndA8SwjO/qjNY\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 15 Nov 2026 17:29:41 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"insert or update on table \\\"products\\\" violates foreign key constraint \\\"products_farmer_id_fkey\\\"\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "quantity-with-decimal-value",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Decimal quantity is rejected\", () => {\r\n    pm.expect(pm.response.code).to.be.oneOf([400, 422]);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Tomatoes\",\r\n  \"price\": 100,\r\n  \"quantity\": 5.0,\r\n  \"farmer_id\": 14,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "products"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "quantity-with-decimal-value",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Tomatoes\",\r\n  \"price\": 100,\r\n  \"quantity\": 5.0,\r\n  \"farmer_id\": 14,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/products",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "35"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"23-sf63XKpJYKKxQMDP4CnvZ2JuDoA\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 15 Nov 2026 17:28:27 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"message\": \"Product added\",\n  \"id\": 33\n}"
+            }
+          ]
+        },
+        {
+          "name": "price-with-decimal-value",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Decimal price is accepted\", () => {\r\n    pm.response.to.have.status(201);\r\n});\r\n\r\npm.test(\"Price is stored as a number\", () => {\r\n    const data = pm.response.json();\r\n    pm.expect(Number(data.price)).to.be.a(\"number\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Tomatoes\",\r\n  \"price\": 100.50,\r\n  \"quantity\": 5,\r\n  \"farmer_id\": 14,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "products"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "price-with-decimal-value",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Tomatoes\",\r\n  \"price\": 100.50,\r\n  \"quantity\": 5,\r\n  \"farmer_id\": 14,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/products",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "35"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"23-5hmKGhyA+rv4ATTlCW7jTTKECmo\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 15 Nov 2026 17:27:59 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"message\": \"Product added\",\n  \"id\": 32\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "get-products",
+      "item": [
+        {
+          "name": "fetch-products",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", () => {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Response is valid JSON\", () => {\r\n    pm.response.to.be.json;\r\n});\r\n\r\npm.test(\"Response time is acceptable\", () => {\r\n    pm.expect(pm.response.responseTime).to.be.below(2000);\r\n});\r\n\r\npm.test(\"Response is not empty\", () => {\r\n    const data = pm.response.json();\r\n    pm.expect(data).to.not.be.null;\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "products"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "fetch-products",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8080/api/products",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "3727"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"e8f-jIXr5DhlQKbyDLYxI2OpvUx/Ovc\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 15 Nov 2026 17:36:33 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"id\": 18,\n    \"name\": \" \",\n    \"image\": null,\n    \"price\": 100,\n    \"quantity\": 5,\n    \"unit\": \"kg\",\n    \"category\": \"Vegetables\",\n    \"farmer_id\": 14,\n    \"created_at\": \"2026-11-15T15:22:30.630Z\",\n    \"farmer_name\": \"K Bandara\",\n    \"farmer_contact\": \"0762345678\",\n    \"farmer_location\": \"Kegalle\"\n  },\n  {\n    \"id\": 22,\n    \"name\": \"Tomatoes\",\n    \"image\": null,\n    \"price\": 100,\n    \"quantity\": 5,\n    \"unit\": \"kg\",\n    \"category\": \"Vegetables\",\n    \"farmer_id\": 1,\n    \"created_at\": \"2026-11-15T15:34:22.691Z\",\n    \"farmer_name\": \"Admin User\",\n    \"farmer_contact\": null,\n    \"farmer_location\": null\n  },\n  {\n    \"id\": 23,\n    \"name\": \"Tomatoes\",\n    \"image\": null,\n    \"price\": 100,\n    \"quantity\": 5,\n    \"unit\": \"kg\",\n    \"category\": \"Vegetables\",\n    \"farmer_id\": 21,\n    \"created_at\": \"2026-11-15T15:34:52.152Z\",\n    \"farmer_name\": \"John\",\n    \"farmer_contact\": null,\n    \"farmer_location\": null\n  },\n  {\n    \"id\": 25,\n    \"name\": \"Tomatoes\",\n    \"image\": null,\n    \"price\": 100,\n    \"quantity\": 5,\n    \"unit\": \"kg\",\n    \"category\": \"Vegetables\",\n    \"farmer_id\": 14,\n    \"created_at\": \"2026-11-15T15:36:21.290Z\",\n    \"farmer_name\": \"K Bandara\",\n    \"farmer_contact\": \"0762345678\",\n    \"farmer_location\": \"Kegalle\"\n  },\n  {\n    \"id\": 26,\n    \"name\": \"Tomatoes\",\n    \"image\": null,\n    \"price\": 100.5,\n    \"quantity\": 5,\n    \"unit\": \"kg\",\n    \"category\": \"Vegetables\",\n    \"farmer_id\": 14,\n    \"created_at\": \"2026-11-15T15:37:48.677Z\",\n    \"farmer_name\": \"K Bandara\",\n    \"farmer_contact\": \"0762345678\",\n    \"farmer_location\": \"Kegalle\"\n  },\n  {\n    \"id\": 17,\n    \"name\": \"Fresh Tomatoes\",\n    \"image\": null,\n    \"price\": 100,\n    \"quantity\": 80,\n    \"unit\": \"kg\",\n    \"category\": \"Vegetables\",\n    \"farmer_id\": 14,\n    \"created_at\": \"2026-11-15T15:15:14.394Z\",\n    \"farmer_name\": \"K Bandara\",\n    \"farmer_contact\": \"0762345678\",\n    \"farmer_location\": \"Kegalle\"\n  },\n  {\n    \"id\": 27,\n    \"name\": \"Tomatoes\",\n    \"image\": null,\n    \"price\": 100,\n    \"quantity\": 50,\n    \"unit\": \"kg\",\n    \"category\": \"Vegetables\",\n    \"farmer_id\": 14,\n    \"created_at\": \"2026-11-15T17:22:33.533Z\",\n    \"farmer_name\": \"K Bandara\",\n    \"farmer_contact\": \"0762345678\",\n    \"farmer_location\": \"Kegalle\"\n  },\n  {\n    \"id\": 28,\n    \"name\": \"Tomatoes\",\n    \"image\": null,\n    \"price\": 100,\n    \"quantity\": 50,\n    \"unit\": \"kg\",\n    \"category\": \"Vegetables\",\n    \"farmer_id\": 14,\n    \"created_at\": \"2026-11-15T17:23:33.398Z\",\n    \"farmer_name\": \"K Bandara\",\n    \"farmer_contact\": \"0762345678\",\n    \"farmer_location\": \"Kegalle\"\n  },\n  {\n    \"id\": 29,\n    \"name\": \" \",\n    \"image\": null,\n    \"price\": 100,\n    \"quantity\": 5,\n    \"unit\": \"kg\",\n    \"category\": \"Vegetables\",\n    \"farmer_id\": 14,\n    \"created_at\": \"2026-11-15T17:24:41.534Z\",\n    \"farmer_name\": \"K Bandara\",\n    \"farmer_contact\": \"0762345678\",\n    \"farmer_location\": \"Kegalle\"\n  },\n  {\n    \"id\": 30,\n    \"name\": \" \",\n    \"image\": null,\n    \"price\": 100,\n    \"quantity\": 5,\n    \"unit\": \"kg\",\n    \"category\": \"Vegetables\",\n    \"farmer_id\": 14,\n    \"created_at\": \"2026-11-15T17:24:59.064Z\",\n    \"farmer_name\": \"K Bandara\",\n    \"farmer_contact\": \"0762345678\",\n    \"farmer_location\": \"Kegalle\"\n  },\n  {\n    \"id\": 31,\n    \"name\": \"Tomatoes,Carrotes, Betroots, Cabbages, Leaks, Cucumber, Rabbish, Onion, Garlic, Bitter Guard\",\n    \"image\": null,\n    \"price\": 100,\n    \"quantity\": 5,\n    \"unit\": \"kg\",\n    \"category\": \"Vegetables\",\n    \"farmer_id\": 14,\n    \"created_at\": \"2026-11-15T17:25:27.803Z\",\n    \"farmer_name\": \"K Bandara\",\n    \"farmer_contact\": \"0762345678\",\n    \"farmer_location\": \"Kegalle\"\n  },\n  {\n    \"id\": 32,\n    \"name\": \"Tomatoes\",\n    \"image\": null,\n    \"price\": 100.5,\n    \"quantity\": 5,\n    \"unit\": \"kg\",\n    \"category\": \"Vegetables\",\n    \"farmer_id\": 14,\n    \"created_at\": \"2026-11-15T17:27:58.226Z\",\n    \"farmer_name\": \"K Bandara\",\n    \"farmer_contact\": \"0762345678\",\n    \"farmer_location\": \"Kegalle\"\n  },\n  {\n    \"id\": 33,\n    \"name\": \"Tomatoes\",\n    \"image\": null,\n    \"price\": 100,\n    \"quantity\": 5,\n    \"unit\": \"kg\",\n    \"category\": \"Vegetables\",\n    \"farmer_id\": 14,\n    \"created_at\": \"2026-11-15T17:28:26.425Z\",\n    \"farmer_name\": \"K Bandara\",\n    \"farmer_contact\": \"0762345678\",\n    \"farmer_location\": \"Kegalle\"\n  },\n  {\n    \"id\": 34,\n    \"name\": \"Tomatoes\",\n    \"image\": null,\n    \"price\": 100,\n    \"quantity\": 5,\n    \"unit\": \"kg\",\n    \"category\": \"Vegetables\",\n    \"farmer_id\": 21,\n    \"created_at\": \"2026-11-15T17:29:09.536Z\",\n    \"farmer_name\": \"John\",\n    \"farmer_contact\": null,\n    \"farmer_location\": null\n  },\n  {\n    \"id\": 38,\n    \"name\": \"Tomatoes,Carrotes, Betroots, Cabbages, Leaks, Cucumber, Rabbish, Onion, Garlic, Bitter Guard\",\n    \"image\": null,\n    \"price\": 100,\n    \"quantity\": 5,\n    \"unit\": \"kg\",\n    \"category\": \"Vegetables\",\n    \"farmer_id\": 14,\n    \"created_at\": \"2026-11-15T17:33:37.882Z\",\n    \"farmer_name\": \"K Bandara\",\n    \"farmer_contact\": \"0762345678\",\n    \"farmer_location\": \"Kegalle\"\n  }\n]"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "get-product-by-farmer-id",
+      "item": [
+        {
+          "name": "get-product-by-farmer-id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Valid farmer ID returns success\", () => {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Response is valid JSON\", () => {\r\n    pm.response.to.be.json;\r\n});\r\n\r\npm.test(\"Response time is acceptable\", () => {\r\n    pm.expect(pm.response.responseTime).to.be.below(2000);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Fresh Tomatoes\",\r\n  \"price\": -100,\r\n  \"quantity\": -5,\r\n  \"farmer_id\": 1,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/products/farmer/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "products",
+                "farmer",
+                "1"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "get-product-by-farmer-id",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Fresh Tomatoes\",\r\n  \"price\": -100,\r\n  \"quantity\": -5,\r\n  \"farmer_id\": 1,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/products/farmer/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "products",
+                    "farmer",
+                    "1"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "232"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"e8-HYSteC8EvdadfuJylmocfxJ7VBs\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 15 Nov 2026 17:36:57 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"id\": 22,\n    \"name\": \"Tomatoes\",\n    \"image\": null,\n    \"price\": 100,\n    \"quantity\": 5,\n    \"unit\": \"kg\",\n    \"category\": \"Vegetables\",\n    \"farmer_id\": 1,\n    \"created_at\": \"2026-11-15T15:34:22.691Z\",\n    \"farmer_name\": \"Admin User\",\n    \"farmer_contact\": null,\n    \"farmer_location\": \"admin\"\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "non-numeric-string-id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Non-numeric farmer ID is rejected\", () => {\r\n    pm.expect(pm.response.code).to.be.oneOf([400, 422]);\r\n});\r\n\r\npm.test(\"Response is valid JSON\", () => {\r\n    pm.response.to.be.json;\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Fresh Tomatoes\",\r\n  \"price\": -100,\r\n  \"quantity\": -5,\r\n  \"farmer_id\": 1,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/products/farmer/abc",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "products",
+                "farmer",
+                "abc"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "non-numeric-string-id",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Fresh Tomatoes\",\r\n  \"price\": -100,\r\n  \"quantity\": -5,\r\n  \"farmer_id\": 1,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/products/farmer/abc",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "products",
+                    "farmer",
+                    "abc"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "29"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"1d-UphmF72G9NaKyHKMLvC4/GhACJM\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 15 Nov 2026 17:37:32 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Invalid farmer ID\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "update-product",
+      "item": [
+        {
+          "name": "valid-id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", () => {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Response is valid JSON\", () => {\r\n    pm.response.to.be.json;\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Fresh Tomatoes\",\r\n  \"price\": 100,\r\n  \"quantity\": 80,\r\n  \"farmer_id\": 1,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/products/17",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "products",
+                "17"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "valid-id",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Fresh Tomatoes\",\r\n  \"price\": 100,\r\n  \"quantity\": 80,\r\n  \"farmer_id\": 1,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/products/17",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "products",
+                    "17"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "42"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"2a-xkx5KN1R/KioLOUe4KCUrVOtulk\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 15 Nov 2026 17:39:07 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"message\": \"Product updated successfully\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "invalid-product-id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Invalid product ID returns 404\", () => {\r\n    pm.response.to.have.status(404);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Fresh Tomatoes\",\r\n  \"price\": 100,\r\n  \"quantity\": 5,\r\n  \"farmer_id\": 1,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/products/666",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "products",
+                "666"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "invalid-product-id",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Fresh Tomatoes\",\r\n  \"price\": 100,\r\n  \"quantity\": 5,\r\n  \"farmer_id\": 1,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/products/666",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "products",
+                    "666"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "29"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"1d-KH4ngqV3S/XmJmUEKpwjFfjZ2wg\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 15 Nov 2026 17:39:28 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Product not found\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "omit-required-field",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Missing required field returns 400\", () => {\r\n    pm.response.to.have.status(400);\r\n});\r\n\r\npm.test(\"Error message is returned\", () => {\r\n    const response = pm.response.json();\r\n    pm.expect(response).to.have.property(\"error\");\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Fresh Tomatoes\",\r\n\r\n  \"quantity\": 5,\r\n  \"farmer_id\": 1,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/products/17",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "products",
+                "17"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "omit-required-field",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Fresh Tomatoes\",\r\n\r\n  \"quantity\": 5,\r\n  \"farmer_id\": 1,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/products/17",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "products",
+                    "17"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "35"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"23-ZSAZ2GCL6qg6GsgSjw9e1IKVoT0\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 15 Nov 2026 17:39:45 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Missing required fields\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "delete-product",
+      "item": [
+        {
+          "name": "valid-id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Product is deleted successfully\", () => {\r\n    pm.response.to.have.status(200);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Fresh Tomatoes\",\r\n  \"price\": -100,\r\n  \"quantity\": -5,\r\n  \"farmer_id\": 1,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/products/19",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "products",
+                "19"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "valid-id",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Fresh Tomatoes\",\r\n  \"price\": -100,\r\n  \"quantity\": -5,\r\n  \"farmer_id\": 1,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/products/18",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "products",
+                    "18"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "42"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"2a-a+2htZNpkCDaj0ausIFBiheaYZ4\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 15 Nov 2026 17:40:46 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"message\": \"Product deleted successfully\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "invalid-id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Invalid product ID returns 404\", () => {\r\n    pm.response.to.have.status(404);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Fresh Tomatoes\",\r\n  \"price\": -100,\r\n  \"quantity\": -5,\r\n  \"farmer_id\": 1,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/products/98",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "products",
+                "98"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "invalid-id",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Fresh Tomatoes\",\r\n  \"price\": -100,\r\n  \"quantity\": -5,\r\n  \"farmer_id\": 1,\r\n  \"unit\": \"kg\",\r\n  \"category\": \"Vegetables\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/products/98",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8080",
+                  "path": [
+                    "api",
+                    "products",
+                    "98"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "29"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"1d-KH4ngqV3S/XmJmUEKpwjFfjZ2wg\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 15 Nov 2026 17:41:05 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Product not found\"\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
